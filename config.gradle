@@ -1,0 +1,44 @@
+/**
+ *
+ *        DEPENDENCIES/VERSIONING/PROJECT SETTINGS
+ *
+ */
+rootProject.ext.APP_PACKAGE = "me.niccorder"
+rootProject.ext.BUILD_TOOLS = "23.0.3"
+rootProject.ext.MIN_SDK = 16
+rootProject.ext.COMPILE_SDK = 24
+rootProject.ext.TARGET_SDK = 24
+
+/**
+ *
+ *        DEPENDENCY VERSIONS
+ *
+ */
+rootProject.ext.ANDROID_SUPPORT = "24.2.1"
+rootProject.ext.BUTTERKNIFE = "8.4.0"
+rootProject.ext.EPOXY = "1.3.0"
+rootProject.ext.RETROLAMBDA = "3.3.0"
+rootProject.ext.RXJAVA = "1.1.6"
+rootProject.ext.RXANDROID = "1.2.1"
+rootProject.ext.RETROFIT = "2.1.0"
+rootProject.ext.OKHTTP3 = "3.4.1"
+rootProject.ext.TIMBER = "4.3.1"
+rootProject.ext.JUNIT = "4.12"
+rootProject.ext.MOCKITO = "1.10.19"
+
+rootProject.ext.RETROLAMBDA_PLUGIN = "me.tatarka.retrolambda"
+
+rootProject.ext.deps = [
+    supportLibrary        :         "com.android.support:appcompat-v7:$ANDROID_SUPPORT",
+    designLibrary         :         "com.android.support:design:$ANDROID_SUPPORT",
+    butterknife           :         "com.jakewharton:butterknife:$BUTTERKNIFE",
+    epoxy                 :         "com.airbnb.android:epoxy:$EPOXY",
+    timber                :         "com.jakewharton.timber:timber:$TIMBER",
+    retrolambda           :         "me.tatarka:gradle-retrolambda:$RETROLAMBDA",
+    rxandroid             :         "io.reactivex:rxandroid:$RXANDROID",
+    rxjava                :         "io.reactivex:rxjava:$RXJAVA",
+    retrofit              :         "com.squareup.retrofit2:retrofit:$RETROFIT",
+    okhttp3               :         "com.squareup.okhttp3:okhttp:$OKHTTP3",
+    junit                 :         "junit:junit:$JUNIT",
+    mockito               :         "org.mockito:mockito-core:$MOCKITO"
+]

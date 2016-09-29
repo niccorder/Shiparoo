@@ -1,0 +1,58 @@
+apply plugin: "com.android.application"
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+  mavenCentral()
+  maven { url "https://jitpack.io" }
+}
+
+android {
+  compileSdkVersion rootProject.COMPILE_SDK
+  buildToolsVersion rootProject.BUILD_TOOLS
+
+  defaultConfig {
+    applicationId rootProject.APP_PACKAGE + ".shiparoo"
+    minSdkVersion rootProject.MIN_SDK
+    targetSdkVersion rootProject.TARGET_SDK
+    versionCode 100000
+    versionName "1.0.0"
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    }
+    debug {
+      applicationIdSuffix ".debug"
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    }
+  }
+}
+
+dependencies {
+  compile fileTree(dir: "libs", include: ["*.jar"])
+
+  /* Main */
+  compile rootProject.deps.supportLibrary
+  compile rootProject.deps.designLibrary
+  compile rootProject.deps.butterknife
+  compile rootProject.deps.epoxy
+  compile rootProject.deps.timber
+
+  /* RxJava/Android */
+  compile rootProject.deps.rxjava
+  compile rootProject.deps.rxandroid
+
+  /* Networking */
+  compile rootProject.deps.retrofit
+  compile rootProject.deps.okhttp3
+
+  /* Test */
+  testCompile rootProject.deps.junit
+  testCompile rootProject.deps.mockito
+}

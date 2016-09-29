@@ -1,0 +1,36 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:2.2.0'
+  }
+}
+
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+
+subprojects { project ->
+  apply from: "$rootDir/config.gradle"
+
+  buildscript {
+    repositories {
+      mavenCentral()
+    }
+    dependencies {
+      classpath rootProject.deps.retrolambda
+    }
+  }
+
+  configurations.all { strategy ->
+    resolutionStrategy.force rootProject.deps.supportLibrary, rootProject.deps.designLibrary,
+        rootProject.deps.retrofit, rootProject.deps.okhttp3
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}
