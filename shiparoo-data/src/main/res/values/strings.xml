@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Shiparoo</string>
+  <string name="exception_no_network">You need a network connection to use Shiparoo. Ensure you have connectivity and try again.</string>
+</resources>

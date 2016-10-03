@@ -1,9 +1,12 @@
 buildscript {
   repositories {
     jcenter()
+    mavenCentral()
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:2.2.0'
+    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+    classpath 'me.tatarka:gradle-retrolambda:3.3.0'
   }
 }
 
@@ -15,22 +18,26 @@ allprojects {
 
 subprojects { project ->
   apply from: "$rootDir/config.gradle"
-
-  buildscript {
-    repositories {
-      mavenCentral()
-    }
-    dependencies {
-      classpath rootProject.deps.retrolambda
-    }
-  }
-
-  configurations.all { strategy ->
-    resolutionStrategy.force rootProject.deps.supportLibrary, rootProject.deps.designLibrary,
-        rootProject.deps.retrofit, rootProject.deps.okhttp3
-  }
 }
 
 task clean(type: Delete) {
   delete rootProject.buildDir
+}
+
+
+task runDomainUnitTests(dependsOn: [':shiparoo-domain:test']) {
+  description 'Run unit tests for the domain layer.'
+}
+
+task runDataUnitTests(
+    dependsOn: [':shiparoo-data:cleanTestDebugUnitTest', ':shiparoo-data:testDebugUnitTest']) {
+  description 'Run unit tests for the data layer.'
+}
+
+task runUnitTests(dependsOn: ['runDomainUnitTests', 'runDataUnitTests']) {
+  description 'Run unit tests for both domain and data layers.'
+}
+
+task runAcceptanceTests(dependsOn: [':shiparoo:connectedAndroidTest']) {
+  description 'Run application acceptance tests.'
 }

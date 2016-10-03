@@ -1,58 +1,83 @@
 apply plugin: "com.android.application"
 apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
 
 repositories {
-  mavenCentral()
-  maven { url "https://jitpack.io" }
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+configurations.all { strategy ->
+    resolutionStrategy.force rootProject.deps.supportLibrary, rootProject.deps.designLibrary,
+            rootProject.deps.cardView, rootProject.deps.retrofit, rootProject.deps.okhttp3
 }
 
 android {
-  compileSdkVersion rootProject.COMPILE_SDK
-  buildToolsVersion rootProject.BUILD_TOOLS
+    compileSdkVersion rootProject.COMPILE_SDK
+    buildToolsVersion rootProject.BUILD_TOOLS
 
-  defaultConfig {
-    applicationId rootProject.APP_PACKAGE + ".shiparoo"
-    minSdkVersion rootProject.MIN_SDK
-    targetSdkVersion rootProject.TARGET_SDK
-    versionCode 100000
-    versionName "1.0.0"
-  }
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    defaultConfig {
+        applicationId rootProject.APP_PACKAGE + ".shiparoo"
+        minSdkVersion rootProject.MIN_SDK
+        targetSdkVersion rootProject.TARGET_SDK
+        versionCode rootProject.APP_VERSION
+        versionName rootProject.APP_VERSION_NAME
+        vectorDrawables.useSupportLibrary true
     }
-    debug {
-      applicationIdSuffix ".debug"
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    productFlavors {
+        soft {
+            applicationIdSuffix ".snapshot"
+            versionNameSuffix "-SNAPSHOT"
+            buildConfigField "boolean", "CRASHLYTICS", "false"
+        }
+        hard {
+            buildConfigField "boolean", "CRASHLYTICS", "true"
+        }
+    }
 }
 
 dependencies {
-  compile fileTree(dir: "libs", include: ["*.jar"])
+    compile project(":shiparoo-domain")
+    compile project(":shiparoo-data")
 
-  /* Main */
-  compile rootProject.deps.supportLibrary
-  compile rootProject.deps.designLibrary
-  compile rootProject.deps.butterknife
-  compile rootProject.deps.epoxy
-  compile rootProject.deps.timber
+    /* Main */
+    apt rootProject.deps.daggerCompiler
+    apt rootProject.deps.butterknifeCompiler
+    provided rootProject.deps.javaxAnnotations
 
-  /* RxJava/Android */
-  compile rootProject.deps.rxjava
-  compile rootProject.deps.rxandroid
+    compile rootProject.deps.supportLibrary
+    compile rootProject.deps.designLibrary
+    compile rootProject.deps.cardView
+    compile rootProject.deps.butterknife
+    compile rootProject.deps.epoxy
+    compile rootProject.deps.dagger
+    compile rootProject.deps.glide
+    compile rootProject.deps.timber
+    compile rootProject.deps.apacheCommonsLang
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: '3.4.1'
 
-  /* Networking */
-  compile rootProject.deps.retrofit
-  compile rootProject.deps.okhttp3
 
-  /* Test */
-  testCompile rootProject.deps.junit
-  testCompile rootProject.deps.mockito
+    /* RxJava/Android */
+    compile rootProject.deps.rxjava
+    compile rootProject.deps.rxandroid
+
+    /* Test */
+    testCompile rootProject.deps.junit
+    testCompile rootProject.deps.mockito
 }

@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.niccorder.shiparoo"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.niccorder.shiparoo">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
+        android:name=".ShiparooApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_main_shiparoo_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".ShiparooApp"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.ui.activities.MainActivity">
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:label="@string/main_activity_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

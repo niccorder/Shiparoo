@@ -1,1 +1,1 @@
-include ':shiparoo'
+include ':shiparoo', ':shiparoo-data', ':shiparoo-domain'

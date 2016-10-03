@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shiparoo/shiparoo.iml" filepath="$PROJECT_DIR$/shiparoo/shiparoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shiparoo-data/shiparoo-data.iml" filepath="$PROJECT_DIR$/shiparoo-data/shiparoo-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shiparoo-domain/shiparoo-domain.iml" filepath="$PROJECT_DIR$/shiparoo-domain/shiparoo-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/signup-flo.iml" filepath="$PROJECT_DIR$/signup-flo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/upToNo-gutte.iml" filepath="$PROJECT_DIR$/upToNo-gutte.iml" />
+    </modules>
+  </component>
+</project>
